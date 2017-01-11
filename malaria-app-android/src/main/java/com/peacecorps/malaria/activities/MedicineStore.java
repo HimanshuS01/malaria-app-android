@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.text.Html;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -138,6 +139,7 @@ public class MedicineStore extends Activity {
 
                 // Showing Alert Message
                 orderMedicineDialog.show();
+                keepDialog(orderMedicineDialog);
             }
         };
     }
@@ -182,6 +184,7 @@ public class MedicineStore extends Activity {
 
                 // Showing Alert Message
                 addMedicineDialog.show();
+                keepDialog(addMedicineDialog);
 
             }
         };
@@ -241,8 +244,17 @@ public class MedicineStore extends Activity {
 
                 // Showing Alert Message
                 settingsDialog.show();
+                keepDialog(settingsDialog);
 
             }
         };
+    }
+
+    private static void keepDialog(Dialog dialog) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
     }
 }

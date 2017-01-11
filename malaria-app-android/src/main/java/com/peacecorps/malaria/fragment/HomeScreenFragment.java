@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -527,6 +528,7 @@ public class HomeScreenFragment extends Fragment {
             }
         });
         dialog.show();
+        keepDialog(dialog);
 
     }
 
@@ -535,5 +537,13 @@ public class HomeScreenFragment extends Fragment {
             FirstAnalyticFragment.checkMediLastTakenTime.setText(mSharedPreferenceStore.mPrefsStore.getString("com.peacecorps.malaria.checkMediLastTakenTime", "").toString());
         }
     }*/
+
+    private static void keepDialog(Dialog dialog) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+    }
 
 }

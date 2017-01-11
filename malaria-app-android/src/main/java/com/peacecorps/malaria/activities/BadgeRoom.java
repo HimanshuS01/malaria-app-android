@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +51,7 @@ public class BadgeRoom extends Activity {
                 badge.setImageDrawable(displayUserBadge());
                 badgeText.setText("Rookie");
                 achievementDialog.show();
+                keepDialog(achievementDialog);
             }
         });
         achievementCategory2.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,7 @@ public class BadgeRoom extends Activity {
                 badge.setImageDrawable(displayGameBadge());
                 badgeText.setText("Mr-Know-It-All");
                 achievementDialog.show();
+                keepDialog(achievementDialog);
             }
         });
 
@@ -132,5 +135,13 @@ public class BadgeRoom extends Activity {
                 startActivity(Intent.createChooser(sendIntent, "Share Via..."));
             }
         };
+    }
+
+    private static void keepDialog(Dialog dialog) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
     }
 }

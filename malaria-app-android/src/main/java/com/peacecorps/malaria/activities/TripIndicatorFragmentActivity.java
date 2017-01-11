@@ -17,6 +17,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -521,6 +522,7 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
             }
         });
         dialog.show();
+        keepDialog(dialog);
 
     }
 
@@ -749,4 +751,11 @@ public class TripIndicatorFragmentActivity extends FragmentActivity {
         newFragment.show(getFragmentManager(),"Departure Time");
     }
 
+    private static void keepDialog(Dialog dialog) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+    }
 }
